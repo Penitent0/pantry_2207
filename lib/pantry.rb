@@ -14,9 +14,13 @@ class Pantry
   end
 
   def enough_ingredients_for?(recipe)
-    recipe.ingredients_required.each do |recipe_ingredient, required_amount|
-      stock.each do |stock_ingredient, stock_amount|
-          require 'pry'; binding.pry
+    stock.each do |ingredient, amount|
+      recipe.ingredients_required.each do |req_ingredient, req_amount|
+        if req_ingredient == ingredient && req_amount >= amount
+          return true
+        elsif req_ingredient == ingredient && req_amount <= amount
+          return false
+        end
       end
     end
   end
